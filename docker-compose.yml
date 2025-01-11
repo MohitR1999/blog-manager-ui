@@ -1,0 +1,18 @@
+name: blog-manager
+services:
+  ui:
+    image: node:22-alpine3.20
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    ports:
+      - "3000:3000"
+    develop:
+     watch:
+       - action : rebuild
+         path : ./package.json
+
+       - action : sync
+         path : .
+         target : /usr/src/app
